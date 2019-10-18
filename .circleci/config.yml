@@ -18,5 +18,8 @@ jobs:
           command: cd androidApp;sudo chmod +x gradlew;./gradlew assembleDebug
 
       - run:
-          name: unit test
+          name: ユニットテスト
           command: cd androidApp;sudo chmod +x gradlew;./gradlew test
+
+      - store_test_results:
+          path: androidApp/app/build/test-results
