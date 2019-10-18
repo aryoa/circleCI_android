@@ -6,6 +6,8 @@ jobs:
       - image: circleci/android:api-23-alpha
     steps:
       - checkout
+      - run: pwd
+      - run: ls
       - run:
           name: デバッグAPKのビルド
           command: ./gradlew assembleDebug
