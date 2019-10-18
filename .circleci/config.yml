@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/code
+    working_directory: ~/code/androidApp
     docker:
       - image: circleci/android:api-23-alpha
     steps:
@@ -13,17 +13,17 @@ jobs:
           name: ライセンスの同意
           command: yes | sdkmanager --licenses || exit 0
 
-      - run:
-          name: デバッグAPKのビルド
-          command: cd androidApp;sudo chmod +x gradlew;./gradlew assembleDebug
+#      - run:
+#          name: デバッグAPKのビルド
+#          command: cd androidApp;sudo chmod +x gradlew;./gradlew assembleDebug
 
       - run:
           name: ユニットテスト
-          command: cd androidApp;sudo chmod +x gradlew;./gradlew test
+          command: sudo chmod +x gradlew;./gradlew test
 
       - store_test_results:
-          path: androidApp/app/build/test-results
+          path: app/build/test-results
 
       - store_artifacts:
-          path: androidApp/app/build/reports
+          path: app/build/reports
           destination: reports
