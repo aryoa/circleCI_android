@@ -10,4 +10,4 @@ jobs:
       - run: ls
       - run:
           name: デバッグAPKのビルド
-          command: cd androidApp;./gradlew assembleDebug
+          command: cd androidApp;sudo chmod +x gradlew;./gradlew assembleDebug
