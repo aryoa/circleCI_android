@@ -23,3 +23,7 @@ jobs:
 
       - store_test_results:
           path: androidApp/app/build/test-results
+
+      - store_artifacts:
+          path: androidApp/app/build/reports
+          destination: reports
