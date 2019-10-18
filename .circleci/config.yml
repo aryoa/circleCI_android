@@ -8,6 +8,8 @@ jobs:
       - checkout
       - run: pwd
       - run: ls
+      - run: yes | sdkmanager --licenses || exit 0
+      - run: yes | sdkmanager --update || exit 0
       - run:
           name: デバッグAPKのビルド
           command: cd androidApp;sudo chmod +x gradlew;./gradlew assembleDebug
