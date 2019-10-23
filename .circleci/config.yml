@@ -10,8 +10,7 @@ jobs:
     steps:
       - checkout # ソースコードを作業ディレクトリにチェックアウト
       - restore_cache: # 最後の実行からチェックサムが変化していない場合は、保存されているキャッシュを復元
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-          working_directory: androidApp
+          key: jars-{{ checksum "androidApp/build.gradle" }}-{{ checksum  "androidApp/app/build.gradle" }}
 
       - run:
           name: パーミッション変更
@@ -26,8 +25,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-          working_directory: androidApp
+          key: jars-{{ checksum "androidApp/build.gradle" }}-{{ checksum  "androidApp/app/build.gradle" }}
 
       - run:
           name: ライセンスの同意
