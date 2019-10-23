@@ -14,19 +14,19 @@ jobs:
 #        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
       - run:
-        name: ls確認
-        command: ls
-        working_directory: androidApp
+          name: ls確認
+          command: ls
+          working_directory: androidApp
 
       - run:
-        name: pwd確認
-        command: pwd
-        working_directory: androidApp
+          name: pwd確認
+          command: pwd
+          working_directory: androidApp
 
       - run:
-        name: パーミッション変更
-        command: sudo chmod +x gradlew
-        working_directory: androidApp
+          name: パーミッション変更
+          command: sudo chmod +x gradlew
+          working_directory: androidApp
 
       - run: pwd
       - run: ls
