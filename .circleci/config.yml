@@ -42,13 +42,13 @@ jobs:
       - run:
           name: ユニットテスト
           command: ./gradlew test
-          working_directory: $PROJECT_DIR
+          working_directory: androidApp
 
       - store_test_results:
           path: app/build/test-results
-          working_directory: $PROJECT_DIR
+          working_directory: androidApp
 
       - store_artifacts:
           path: app/build/reports
           destination: reports
-          working_directory: $PROJECT_DIR
+          working_directory: androidApp
