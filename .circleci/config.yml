@@ -26,7 +26,7 @@ jobs:
       - run:
           name: パーミッション変更
           command: sudo chmod +x gradlew
-          working_directory: androidApp
+          working_directory: "androidApp"
 
       - run: pwd
       - run: ls
