@@ -7,12 +7,13 @@ jobs:
 
     environment:
       JVM_OPTS: -Xmx3200m # メモリ不足エラーを回避するために最大ヒープサイズを制限
-      PROJECT_DIR: androidApp
+      PROJECT_DIR: "androidApp"
     steps:
       - checkout # ソースコードを作業ディレクトリにチェックアウト
 #      - restore_cache: # 最後の実行からチェックサムが変化していない場合は、保存されているキャッシュを復元
 #        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
+      - run: echo $PROJECT_DIR
       - run:
           name: ls確認
           command: ls
@@ -26,7 +27,7 @@ jobs:
       - run:
           name: パーミッション変更
           command: sudo chmod +x gradlew
-          working_directory: "androidApp"
+          working_directory: androidApp
 
       - run: pwd
       - run: ls
