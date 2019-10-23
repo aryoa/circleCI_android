@@ -4,8 +4,20 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-23-alpha
+
+    environment:
+      JVM_OPTS: -Xmx3200m # メモリ不足エラーを回避するために最大ヒープサイズを制限
+      PROJECT_DIR: androidApp
     steps:
-      - checkout
+      - checkout # ソースコードを作業ディレクトリにチェックアウト
+#      - restore_cache: # 最後の実行からチェックサムが変化していない場合は、保存されているキャッシュを復元
+#        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+
+      -run:
+        name: パーミッション変更
+        command: sudo chmod +x gradlew
+        working_directory: $PROJECT_DIR
+
       - run: pwd
       - run: ls
 
@@ -13,17 +25,19 @@ jobs:
           name: ライセンスの同意
           command: yes | sdkmanager --licenses || exit 0
 
-#      - run:
 #          name: デバッグAPKのビルド
 #          command: cd androidApp;sudo chmod +x gradlew;./gradlew assembleDebug
 
       - run:
           name: ユニットテスト
-          command: cd androidApp;sudo chmod +x gradlew;./gradlew test
+          command: ./gradlew test
+          working_directory: $PROJECT_DIR
 
       - store_test_results:
-          path: androidApp/app/build/test-results
+          path: app/build/test-results
+          working_directory: $PROJECT_DIR
 
       - store_artifacts:
-          path: androidApp/app/build/reports
+          path: app/build/reports
           destination: reports
+          working_directory: $PROJECT_DIR
