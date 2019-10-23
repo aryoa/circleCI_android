@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "456809358826",
+    "firebase_url": "https://sample-firebase-45143.firebaseio.com",
+    "project_id": "sample-firebase-45143",
+    "storage_bucket": "sample-firebase-45143.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456809358826:android:18c2ba110c1651005f7e93",
+        "android_client_info": {
+          "package_name": "com.example.circleciapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456809358826-mn0lh8nr94901q82vck78p4sd24egdfb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbJ0uekVxuqMPNThwS3TK2l2cY-O6-3bA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456809358826-mn0lh8nr94901q82vck78p4sd24egdfb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

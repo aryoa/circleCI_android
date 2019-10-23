@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CircleCI Application</string>
+    <string name="hello">こんにちは</string>
+    <string name="tap_button">タップ</string>
 </resources>
