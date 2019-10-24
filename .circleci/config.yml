@@ -31,9 +31,6 @@ jobs:
           name: ライセンスの同意
           command: yes | sdkmanager --licenses || exit 0
 
-#          name: デバッグAPKのビルド
-#          command: cd androidApp;sudo chmod +x gradlew;./gradlew assembleDebug
-
       - run:
           name: デバッグAPKとリリースAPKをビルド
           command: |
@@ -54,7 +51,7 @@ jobs:
       - run:
           name: gcloud を承認してコンフィグのデフォルトを設定
           command: |
-            sudo gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+            sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           working_directory: androidApp
 
@@ -62,9 +59,23 @@ jobs:
           name: Firebase Test Lab を使用してテスト
           command: >
             sudo gcloud firebase test android run
-              --app <local_server_path>/<app_apk>.apk
-              --test <local_server_path>/<app_test_apk>.apk
-              --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
+              --type instrumentation
+              --app ./app/build/outputs/apk/debug/app-debug.apk
+              --test ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+          working_directory: androidApp
+      - run:
+          name: Test結果保存用のディレクトリ作成
+          command: mkdir firebase_results
+          working_directory: androidApp
+      - run:
+          name: gsutil 依存関係をインストールしてテスト結果データをダウンロード
+          command: |
+            sudo pip install -U crcmod
+            sudo gsutil -m cp -r -U `sudo gsutil ls gs://test-lab-ubxn5ztjx55k4-i4y49mj65hnzm | tail -1` firebase_results/ | true
+          working_directory: androidApp
+
+      - store_artifacts:
+          path: firebase_results
           working_directory: androidApp
 
 #      - run:
