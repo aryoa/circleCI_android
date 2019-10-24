@@ -69,10 +69,12 @@ jobs:
           path: androidApp/firebase_results
 
   hoge1:
-    - run: echo "run hoge1"
+    steps:
+      - run: echo "run hoge1"
 
   hoge2:
-    - run: echo "run hoge2"
+    steps:
+      - run: echo "run hoge2"
 
 workflows:
   version: 2
