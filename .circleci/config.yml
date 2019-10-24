@@ -54,7 +54,7 @@ jobs:
       - run:
           name: gcloud を承認してコンフィグのデフォルトを設定
           command: |
-            sudo gcloud auth activate-service-account --key file=${HOME}/gcloud-service-key.json
+            sudo gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           working_directory: androidApp
 
