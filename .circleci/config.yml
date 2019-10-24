@@ -35,15 +35,43 @@ jobs:
 #          command: cd androidApp;sudo chmod +x gradlew;./gradlew assembleDebug
 
       - run:
-          name: ユニットテスト
-          command: ./gradlew lint test
+          name: デバッグAPKとリリースAPKをビルド
+          command: |
+            ./gradlew :app:assembleDebug
+            ./gradlew :app:assembleDebugAndroidTest
           working_directory: androidApp
 
-      - store_test_results:
-          path: app/build/test-results
+      - run:
+          name: Google サービスアカウントを保存
+          command: echo $CLIENT_SECRET > ${HOME}/gcloud-service-key.json
           working_directory: androidApp
 
-      - store_artifacts:
-          path: app/build/reports
-          destination: reports
+      - run:
+          name: gcloud を承認してコンフィグのデフォルトを設定
+          command: |
+            sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           working_directory: androidApp
+
+      - run:
+          name: Firebase Test Lab を使用してテスト
+          command: >
+            sudo gcloud firebase test android run
+              --app <local_server_path>/<app_apk>.apk
+              --test <local_server_path>/<app_test_apk>.apk
+              --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
+          working_directory: androidApp
+
+#      - run:
+#          name: ユニットテスト
+#          command: ./gradlew lint test
+#          working_directory: androidApp
+#
+#      - store_test_results:
+#          path: app/build/test-results
+#          working_directory: androidApp
+#
+#      - store_artifacts:
+#          path: app/build/reports
+#          destination: reports
+#          working_directory: androidApp
