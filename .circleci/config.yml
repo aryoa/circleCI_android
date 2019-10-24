@@ -42,6 +42,11 @@ jobs:
           working_directory: androidApp
 
       - run:
+          name: 環境変数確認
+          command: echo $CLIENT_SECRET
+          working_directory: androidApp
+          
+      - run:
           name: Google サービスアカウントを保存
           command: echo $CLIENT_SECRET > ${HOME}/gcloud-service-key.json
           working_directory: androidApp
