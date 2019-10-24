@@ -69,10 +69,14 @@ jobs:
           path: androidApp/firebase_results
 
   hoge1:
+    docker:
+      - image: circleci/ruby:2.4.1
     steps:
       - run: echo "run hoge1"
 
   hoge2:
+    docker:
+      - image: circleci/ruby:2.4.1
     steps:
       - run: echo "run hoge2"
 
