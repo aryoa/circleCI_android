@@ -68,6 +68,19 @@ jobs:
       - store_artifacts:
           path: androidApp/firebase_results
 
+  hoge1:
+    - run: echo "run hoge1"
+
+  hoge2:
+    - run: echo "run hoge2"
+
+workflows:
+  version: 2
+  hoge:
+    jobs:
+      - hoge1
+      - hoge2
+
 #      - run:
 #          name: ユニットテスト
 #          command: ./gradlew lint test
