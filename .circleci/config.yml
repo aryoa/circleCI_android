@@ -71,8 +71,7 @@ jobs:
           working_directory: androidApp
 
       - store_artifacts:
-          path: firebase_results
-          working_directory: androidApp
+          path: androidApp/firebase_results
 
 #      - run:
 #          name: ユニットテスト
