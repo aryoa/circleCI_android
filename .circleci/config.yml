@@ -67,7 +67,9 @@ jobs:
           name: gsutil 依存関係をインストールしてテスト結果データをダウンロード
           command: |
             sudo pip install -U crcmod
-            sudo gsutil -m cp -r -U `sudo gsutil ls gs://test-lab-ubxn5ztjx55k4-i4y49mj65hnzm | tail -1` firebase_results/ | true
+            sudo gsutil ls -tr gs://test-lab-ubxn5ztjx55k4-i4y49mj65hnzm
+            sudo gsutil ls -tr gs://test-lab-ubxn5ztjx55k4-i4y49mj65hnzm
+            sudo gsutil -m cp -r -U `sudo gsutil ls -tr gs://test-lab-ubxn5ztjx55k4-i4y49mj65hnzm | tail -1` firebase_results/ | true
           working_directory: androidApp
 
       - store_artifacts:
